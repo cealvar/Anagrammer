@@ -7,7 +7,7 @@ public class Main {
         Solver anagrammer = new Solver();
 
         while (!stop) {
-            System.out.print("Enter str ing: ");
+            System.out.print("Enter string: ");
             Scanner in = new Scanner(System.in);
             str = in.nextLine();
             int str_length = str.length();
