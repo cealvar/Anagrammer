@@ -1,9 +1,9 @@
 public class Node<K,V> {
     private K key;
     private V value;
-    private Node<K,V> next;
+    private Node<K, V> next;
 
-    public Node (K initKey, V initValue, Node<K,V> initNext) {
+    public Node (K initKey, V initValue, Node<K, V> initNext) {
         key = initKey;
         value = initValue;
         next = initNext;
@@ -21,7 +21,7 @@ public class Node<K,V> {
         this.value = value;
     }
 
-    public void setNext(Node <K,V> link) {
+    public void setNext(Node <K, V> link) {
         next = link;
     }
 

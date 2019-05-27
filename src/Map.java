@@ -18,9 +18,6 @@ public interface Map<K,V> {
      */
     V get(K key);
 
-    /* This method returns true if the Map contains no key-value mappings, and false otherwise. */
-    boolean isEmpty();
-
     /* This method associates the specified key with the specified value in the Map
        and returns the newly associated value, if the specified key is not already in the HashMap.
        If the specified key is already in the HashMap,
@@ -37,6 +34,9 @@ public interface Map<K,V> {
        if it is currently mapped to to some value, and returns null otherwise.
      */
     V replace(K key, V value);
+
+    /* This method returns true if the Map contains no key-value mappings, and false otherwise. */
+    boolean isEmpty();
 
     /* This method returns the number of key-value mappings in the Map. */
     int size();
