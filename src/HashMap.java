@@ -25,10 +25,6 @@ public class HashMap<K, V> implements Map<K, V> {
         return 0;
     }
 
-    private boolean check(K a, K b) {
-        return (Objects.equals(b, a));
-    }
-
     @Override
     @SuppressWarnings("unchecked")
     public void clear() {
@@ -49,7 +45,7 @@ public class HashMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean containsValue(V value) {
-        for (Node ptr: map) {
+        for (Node<K, V> ptr: map) {
             if (ptr != null) {
                 while (ptr != null) {
                     if (Objects.equals(ptr.getValue(), value))
@@ -175,7 +171,7 @@ public class HashMap<K, V> implements Map<K, V> {
         m.put("AaBB", 50);
         System.out.println(m);
 
-        System.out.println(m.remove("c"));
+        System.out.println(m.containsKey(null));
 
         System.out.println(m);
     }
