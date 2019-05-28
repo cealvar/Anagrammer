@@ -1,22 +1,55 @@
-public class Solver {
+import java.util.HashSet;
+import java.util.Set;
 
-    public void permute(String str, int start, int end) {
-        if (start == end)
-            System.out.println(str);
-        else {
-            for (int i = start; i <= end; i++) {
-                str = swap(str, start, i);
-                permute(str, start + 1, end);
-                str = swap(str, start, i);
+public class Solver<K, V> {
+    private Set<String> perms;
+    private HashMap anagram_map;
+
+    @SuppressWarnings("unchecked")
+    public Set<String> permute(String str) {
+        if (str.length() == 0) {
+            Set set = new HashSet();
+            set.add("");
+            return set;
+        }
+        char ch = str.charAt(0);
+        String substr = str.substring(1);
+
+        Set<String> prevMapSet = permute(substr);
+        HashMap<String, String> map = new HashMap<>();
+
+        for (String word : prevMapSet) {
+            for (int i = 0; i <= word.length(); i++) {
+                String new_word = word.substring(0, i) + ch + word.substring(i);
+                if (!map.containsKey(new_word)) {
+                    map.put(new_word, new_word);
+                }
             }
         }
+        anagram_map = map;
+        System.out.println(anagram_map);
+        perms = map.keySet();
+        return perms;
     }
 
-    private String swap(String str, int i, int j) {
-        char[] charArr = str.toCharArray();
-        char tmp = charArr[i];
-        charArr[i] = charArr[j];
-        charArr[j] = tmp;
-        return String.valueOf(charArr);
+    public int getNumberofAnagrams() {
+        return perms.size();
+    }
+
+    public Set<String> getAnagrams() {
+        return perms;
+    }
+
+    public HashMap getAnagramMap() {
+        return anagram_map;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (String s : perms) {
+            sb.append(s).append("\n");
+        }
+        return sb.toString();
     }
 }

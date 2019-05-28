@@ -1,14 +1,18 @@
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class HashMap<K, V> implements Map<K, V> {
     private Node<K, V>[] map;
+    private HashSet<K> keys;
     private int cap; // max capacity of map
     private int size; // how many mappings
 
     @SuppressWarnings("unchecked")
     public HashMap() {
-        map = (Node<K, V>[]) new Node[64];
-        cap = 64;
+        map = (Node<K, V>[]) new Node[1000];
+        keys = new HashSet<>();
+        cap = 1000;
     }
 
     @SuppressWarnings("unchecked")
@@ -72,6 +76,7 @@ public class HashMap<K, V> implements Map<K, V> {
     public V put(K key, V value) {
         int hash = hash(key);
         Node<K, V> ptr = map[hash];
+        keys.add(key);
         if (ptr == null) {
             map[hash] = new Node<>(key, value, null);
             size++;
@@ -143,17 +148,22 @@ public class HashMap<K, V> implements Map<K, V> {
         return size;
     }
 
+    public Set<K> keySet() {
+        return keys;
+    }
+
     public String toString() {
         if (isEmpty())
             return "{}";
         StringBuilder map_str = new StringBuilder();
-        for (Node<K,V> ptr : map) {
+        for (int i = 0; i < map.length; i++) {
+            Node ptr = map[i];
             if (ptr != null) {
+                map_str.append("Bucket ").append(i).append(": ");
                 while (ptr != null) {
-                    map_str.append(ptr.getKey()).append(":").append(ptr.getValue());
-                    if (ptr.getNext() != null) {
+                    map_str.append("[").append(ptr.getKey()).append(":").append(ptr.getValue()).append("]");
+                    if (ptr.getNext() != null)
                         map_str.append(" -> ");
-                    }
                     ptr = ptr.getNext();
                 }
                 map_str.append("\n");
