@@ -27,7 +27,6 @@ public class Solver<K, V> {
             }
         }
         anagram_map = map;
-        System.out.println(anagram_map);
         perms = map.keySet();
         return perms;
     }
